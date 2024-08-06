@@ -2,6 +2,12 @@
 const { app, BrowserWindow, ipcMain } = require("electron");
 const { exec, spawn } = require("child_process");
 const path = require("node:path");
+const Convert = require("ansi-to-html");
+const convert = new Convert();
+// thanks to https://stackoverflow.com/a/48270043/2295672 for terminal
+const Terminal = require("terminal.js");
+
+const terminal = new Terminal({ columns: 150, rows: 100 });
 
 let runningProcess = null;
 
@@ -38,11 +44,24 @@ const createWindow = () => {
 function registerIPC() {
   ipcMain.handle("run-command", async (event, command, args) => {
     return new Promise((resolve, reject) => {
-      runningProcess = spawn(command, args);
+		// const cmd = command + " " + args.join(" ") + ` 2>/dev/null`;
+		// runningProcess = exec(cmd, (error, stdout, stderr) => {
+		// 	if (error) {
+		// 		console.error(`exec error: ${error}`);
+		// 		reject(stderr);
+		// 		return;
+		// 	}
+		// 	console.log(`stdout: ${stdout}`);
+		// 	resolve(stdout);
+		// 	// stderr will be empty due to redirection
+		// });
+
+      runningProcess = spawn(command, args, { shell: true });
       let output = "";
 
       runningProcess.stdout.on("data", (data) => {
-        output += data.toString();
+		terminal.write(data);
+        output += convert.toHtml(data.toString());
         console.log("output comming", data.toString());
       });
 
@@ -52,7 +71,8 @@ function registerIPC() {
 
       runningProcess.on("close", (code) => {
         if (code === 0) {
-          resolve(output);
+		console.log("terminal final", terminal.toString("ansi"));
+          resolve(terminal.toString("ansi"));
         } else {
           reject(new Error(`Process exited with code ${code}`));
         }
@@ -65,6 +85,7 @@ function registerIPC() {
     if (!runningProcess) {
       return Promise.reject(new Error("No process is running"));
     }
+	console.log('ending', runningProcess.pid);
     return new Promise((resolve, reject) => {
       runningProcess.kill("SIGTERM"); // Send signal to terminate the process
 

@@ -13,6 +13,7 @@
         "500",
         "--length",
         "5000",
+		// "2>/dev/null" // thanks to https://github.com/ggerganov/whisper.cpp/issues/10#issuecomment-2244048737
       ];
 	  isStreaming = true;
       const result = await window.api.runCommand(program, args);
