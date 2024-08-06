@@ -14,7 +14,7 @@
   "build": {
     "appId": "com.aviaryan.voicenotes",
     "files": [
-      "dist/**/*",
+      "out/**/*",
       "main.js",
       "preload.js",
       "index.html",
