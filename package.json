@@ -30,8 +30,9 @@
       "target": "nsis"
     },
     "mac": {
+      "icon": "images/icon",
       "category": "your.app.category.type",
-      "target": "dmg"
+      "target": "dir"
     },
     "linux": {
       "target": "AppImage"
