@@ -24,9 +24,4 @@
   h1 {
 	text-align: center;
   }
-
-  button {
-    padding: 0.5em 1em;
-    font-size: 1em;
-  }
 </style>

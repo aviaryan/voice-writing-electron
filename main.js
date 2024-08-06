@@ -7,7 +7,7 @@ const path = require("node:path");
 const Terminal = require("terminal.js");
 
 const groq = new Groq({
-  apiKey: "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",
+  apiKey: process.env.GROQ_API_KEY,
 });
 let runningProcess = null;
 
@@ -40,8 +40,6 @@ function registerIPC() {
           "transcribe-stream-output",
           terminal.toString("plain").trim()
         );
-        // output += data.toString();
-        // console.log("output comming", data.toString());
       });
 
       runningProcess.stderr.on("data", (data) => {
@@ -77,20 +75,6 @@ function registerIPC() {
   });
 
   ipcMain.handle("call-groq-api", async (event, prompt) => {
-    // try {
-    //   const response = await axios.post("https://api.groq.com/v1/llama3", {
-    //     prompt: prompt,
-    //     // Add any necessary headers or authentication here
-    //     headers: {
-    //       Authorization: "Bearer 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",
-    //       "Content-Type": "application/json",
-    //     },
-    //   });
-    //   return response.data;
-    // } catch (error) {
-    //   console.error("Error calling Groq API:", error);
-    //   return { error: error.message };
-    // }
     const chatCompletion = groq.chat.completions.create({
       messages: [
         {
