@@ -1,4 +1,6 @@
 <script>
+  import { postProcessTranscription } from "./lib";
+
   let isStreaming = false;
   let output = "";
 
@@ -18,6 +20,8 @@
       isStreaming = true;
       const result = await window.api.runCommand(program, args);
       console.log(result);
+	  const processed = await postProcessTranscription(result);
+	  output = processed;
     } catch (err) {
       console.error("Error accessing microphone", err);
     }
@@ -46,7 +50,7 @@
 
 <style>
   div {
-	text-align: center;
+    text-align: center;
     margin-top: 20px;
   }
 

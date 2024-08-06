@@ -20,4 +20,5 @@ contextBridge.exposeInMainWorld("api", {
   stopCommand: () => ipcRenderer.invoke("stop-command"),
   onStreamOutput: (callback) =>
     ipcRenderer.on("transcribe-stream-output", (event, data) => callback(data)),
+  callGroqApi: (prompt) => ipcRenderer.invoke("call-groq-api", prompt),
 });

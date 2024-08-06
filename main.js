@@ -1,10 +1,14 @@
 // Modules to control application life and create native browser window
 const { app, BrowserWindow, ipcMain } = require("electron");
-const { exec, spawn } = require("child_process");
+const { spawn } = require("child_process");
+const Groq = require("groq-sdk");
 const path = require("node:path");
 // thanks to https://stackoverflow.com/a/48270043/2295672 for terminal
 const Terminal = require("terminal.js");
 
+const groq = new Groq({
+  apiKey: "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",
+});
 let runningProcess = null;
 
 const createWindow = () => {
@@ -28,11 +32,14 @@ function registerIPC() {
   ipcMain.handle("run-command", async (event, command, args) => {
     return new Promise((resolve, reject) => {
       runningProcess = spawn(command, args, { shell: true });
-	  const terminal = new Terminal({ columns: 150, rows: 100 });
+      const terminal = new Terminal({ columns: 150, rows: 100 });
 
       runningProcess.stdout.on("data", (data) => {
-		terminal.write(data);
-		event.sender.send("transcribe-stream-output", terminal.toString("plain").trim());
+        terminal.write(data);
+        event.sender.send(
+          "transcribe-stream-output",
+          terminal.toString("plain").trim()
+        );
         // output += data.toString();
         // console.log("output comming", data.toString());
       });
@@ -43,7 +50,7 @@ function registerIPC() {
 
       runningProcess.on("close", (code) => {
         if (code === 0) {
-			console.log("terminal final", terminal.toString("plain"));
+          console.log("terminal final", terminal.toString("plain").trim());
           resolve(terminal.toString("plain").trim());
         } else {
           reject(new Error(`Process exited with code ${code}`));
@@ -57,7 +64,6 @@ function registerIPC() {
     if (!runningProcess) {
       return Promise.reject(new Error("No process is running"));
     }
-	console.log('ending', runningProcess.pid);
     return new Promise((resolve, reject) => {
       runningProcess.kill("SIGTERM"); // Send signal to terminate the process
 
@@ -68,6 +74,33 @@ function registerIPC() {
       });
       // Optionally, you could also handle process errors here
     });
+  });
+
+  ipcMain.handle("call-groq-api", async (event, prompt) => {
+    // try {
+    //   const response = await axios.post("https://api.groq.com/v1/llama3", {
+    //     prompt: prompt,
+    //     // Add any necessary headers or authentication here
+    //     headers: {
+    //       Authorization: "Bearer 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",
+    //       "Content-Type": "application/json",
+    //     },
+    //   });
+    //   return response.data;
+    // } catch (error) {
+    //   console.error("Error calling Groq API:", error);
+    //   return { error: error.message };
+    // }
+    const chatCompletion = groq.chat.completions.create({
+      messages: [
+        {
+          role: "user",
+          content: prompt,
+        },
+      ],
+      model: "llama3-8b-8192",
+    });
+    return chatCompletion;
   });
 }
 
