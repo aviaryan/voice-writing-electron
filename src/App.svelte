@@ -17,11 +17,12 @@
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-    padding: 1em;
+    padding: 0 1em;
     margin: auto;
   }
 
   h1 {
+	margin-top: 0.25em;
 	text-align: center;
   }
 </style>
