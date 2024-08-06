@@ -1,5 +1,5 @@
 // Modules to control application life and create native browser window
-const { app, BrowserWindow, ipcMain } = require("electron");
+const { app, BrowserWindow, ipcMain, systemPreferences } = require("electron");
 const { spawn } = require("child_process");
 const Groq = require("groq-sdk");
 const path = require("node:path");
@@ -94,6 +94,8 @@ function registerIPC() {
 app.whenReady().then(() => {
   createWindow();
   registerIPC();
+  // ask for microphone access before recording
+  systemPreferences.askForMediaAccess("microphone");
 
   app.on("activate", () => {
     // On macOS it's common to re-create a window in the app when the

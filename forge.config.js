@@ -3,10 +3,14 @@ const { FuseV1Options, FuseVersion } = require('@electron/fuses');
 
 module.exports = {
   packagerConfig: {
+    osxSign: {
+      "hardened-runtime": false, // https://stackoverflow.com/a/73347638/2295672
+    },
     arch: "x64",
     asar: true,
     icon: "/images/icon",
-    name: 'Voice Writing Electron',
+    name: "Voice Writing Electron",
+    extendInfo: "build/Info.plist",
   },
   rebuildConfig: {},
   makers: [
