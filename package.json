@@ -7,7 +7,9 @@
     "start": "electron-forge start",
     "test": "echo \"Error: no test specified\" && exit 1",
     "package": "electron-forge package",
-    "make": "electron-forge make"
+    "make": "electron-forge make",
+    "build:webpack": "webpack --mode production",
+    "dev:webpack": "webpack serve --mode development"
   },
   "keywords": [],
   "author": "",
@@ -21,9 +23,16 @@
     "@electron-forge/plugin-auto-unpack-natives": "^7.4.0",
     "@electron-forge/plugin-fuses": "^7.4.0",
     "@electron/fuses": "^1.8.0",
-    "electron": "^31.3.1"
+    "css-loader": "^7.1.2",
+    "electron": "^31.3.1",
+    "style-loader": "^4.0.0",
+    "svelte-loader": "^3.2.3",
+    "webpack": "^5.93.0",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^5.0.4"
   },
   "dependencies": {
-    "electron-squirrel-startup": "^1.0.1"
+    "electron-squirrel-startup": "^1.0.1",
+    "svelte": "^4.2.18"
   }
 }

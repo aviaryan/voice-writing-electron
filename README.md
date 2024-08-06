@@ -1,0 +1,2 @@
+- Using electron with svelete looks like a mess.
+- People say use Tauri + svelete.
