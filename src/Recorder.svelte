@@ -5,6 +5,24 @@
   let audioUrl = '';
   let audioBlob;
 
+  async function transcribe() {
+    console.log("transcribe");
+	// const program = '/Users/aviaryan/dev/__others/whisper.cpp/main';
+    // const args = [
+    //   "-m",
+    //   "./models/ggml-large-v2.bin",
+    //   "-l",
+    //   "en",
+    //   "--output-txt",
+    //   "--prompt",
+    //   "Here is a brain dump of what I am thinking right now:",
+    //   "-f",
+    //   "/Users/aviaryan/github/otterai-api/tests/test2.wav",
+    // ];
+    // const result = await window.api.runCommand("ls", ["-la"]);
+    console.log(result);
+  }
+
   async function startRecording() {
     try {
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true });

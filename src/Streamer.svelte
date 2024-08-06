@@ -1,6 +1,6 @@
 <script>
   let isStreaming = false;
-  let output = '';
+  let output = "";
 
   async function startStreaming() {
     try {
@@ -14,21 +14,20 @@
         "500",
         "--length",
         "5000",
-		// "2>/dev/null" // thanks to https://github.com/ggerganov/whisper.cpp/issues/10#issuecomment-2244048737
       ];
-	  isStreaming = true;
+      isStreaming = true;
       const result = await window.api.runCommand(program, args);
-	  console.log(result);
+      console.log(result);
     } catch (err) {
       console.error("Error accessing microphone", err);
     }
   }
 
   async function stopStreaming() {
-	try {
+    try {
       await window.api.stopCommand();
     } catch (error) {
-	  console.error(`Error stopping process: ${error.message}`);
+      console.error(`Error stopping process: ${error.message}`);
     }
     isStreaming = false;
   }
@@ -39,13 +38,18 @@
 </script>
 
 <div>
-	<pre>{output}</pre>
   <button on:click={isStreaming ? stopStreaming : startStreaming}>
     {isStreaming ? "Stop Streaming" : "Start Streaming"}
   </button>
+  <pre>{output}</pre>
 </div>
 
 <style>
+  div {
+	text-align: center;
+    margin-top: 20px;
+  }
+
   button {
     margin: 10px;
     padding: 10px;
