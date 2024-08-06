@@ -5,6 +5,12 @@
   let isPostProcessing = false;
   let output = "";
 
+  function processStream(data) {
+	// no need to show [BLANK_AUDIO] to the end-user, the terminal stream can have it though
+	// don't try to mess with the terminal stream
+	return data.replace(/\[BLANK_AUDIO\]/g, '');
+  }
+
   async function startStreaming() {
     try {
       const program = "/Users/aviaryan/dev/__others/whisper.cpp/stream";
@@ -22,7 +28,7 @@
       const result = await window.api.runCommand(program, args);
       console.log(result);
 	  isPostProcessing = true;
-	  const processed = await postProcessTranscription(result);
+	  const processed = await postProcessTranscription(processStream(result));
 	  output = processed;
     } catch (err) {
       console.error("Error accessing microphone", err);
@@ -40,7 +46,7 @@
   }
 
   window.api.onStreamOutput((data) => {
-    output = data;
+    output = processStream(data);
   });
 </script>
 
