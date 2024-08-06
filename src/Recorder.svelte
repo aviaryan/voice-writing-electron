@@ -53,10 +53,12 @@
     {isRecording ? 'Stop Recording' : 'Start Recording'}
   </button>
 
-  {#if audioUrl}
-    <audio controls>
-      <source src={audioUrl} type="audio/webm">
-      Your browser does not support the audio element.
-    </audio>
-  {/if}
+  {#key audioUrl}
+	{#if audioUrl}
+		<audio controls>
+		<source src={audioUrl} type="audio/webm">
+		Your browser does not support the audio element.
+		</audio>
+	{/if}
+  {/key}
 </div>

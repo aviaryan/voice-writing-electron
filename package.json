@@ -4,7 +4,7 @@
   "description": "Voice Writing App using Electron",
   "main": "main.js",
   "scripts": {
-    "start": "electron-forge start",
+    "start": "npm run webpack; electron-forge start",
     "test": "echo \"Error: no test specified\" && exit 1",
     "package": "electron-forge package",
     "make": "electron-forge make",
