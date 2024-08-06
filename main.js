@@ -1,5 +1,5 @@
 // Modules to control application life and create native browser window
-const { app, BrowserWindow } = require("electron");
+const { app, BrowserWindow, session } = require("electron");
 const path = require("node:path");
 
 const createWindow = () => {
@@ -11,6 +11,19 @@ const createWindow = () => {
       preload: path.join(__dirname, "preload.js"),
     },
   });
+
+  // Modify CSP to allow 'blob:' for media sources
+  // not needed apparantely
+//   session.defaultSession.webRequest.onHeadersReceived((details, callback) => {
+//     callback({
+//       responseHeaders: {
+//         ...details.responseHeaders,
+//         "Content-Security-Policy": [
+//           "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'; media-src 'self' blob:;",
+//         ],
+//       },
+//     });
+//   });
 
   // and load the index.html of the app.
   mainWindow.loadFile("index.html");

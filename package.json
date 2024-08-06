@@ -8,7 +8,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "package": "electron-forge package",
     "make": "electron-forge make",
-    "build:webpack": "webpack --mode production",
+    "webpack": "webpack --mode production",
     "dev:webpack": "webpack serve --mode development"
   },
   "keywords": [],

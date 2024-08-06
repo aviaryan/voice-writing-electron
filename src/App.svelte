@@ -1,13 +1,15 @@
 <!-- src/App.svelte -->
 <script>
+	import Recorder from './Recorder.svelte';
   let count = 0;
 </script>
 
 <main>
   <h1>Hello Electron + Svelte!</h1>
   <button on:click={() => count += 1}>
-    Count: {count}
+    Counter: {count}
   </button>
+  <Recorder />
 </main>
 
 <style>
