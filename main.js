@@ -1,6 +1,9 @@
 // Modules to control application life and create native browser window
-const { app, BrowserWindow, session } = require("electron");
+const { app, BrowserWindow, ipcMain } = require("electron");
+const { exec, spawn } = require("child_process");
 const path = require("node:path");
+
+let runningProcess = null;
 
 const createWindow = () => {
   // Create the browser window.
@@ -14,16 +17,16 @@ const createWindow = () => {
 
   // Modify CSP to allow 'blob:' for media sources
   // not needed apparantely
-//   session.defaultSession.webRequest.onHeadersReceived((details, callback) => {
-//     callback({
-//       responseHeaders: {
-//         ...details.responseHeaders,
-//         "Content-Security-Policy": [
-//           "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'; media-src 'self' blob:;",
-//         ],
-//       },
-//     });
-//   });
+  //   session.defaultSession.webRequest.onHeadersReceived((details, callback) => {
+  //     callback({
+  //       responseHeaders: {
+  //         ...details.responseHeaders,
+  //         "Content-Security-Policy": [
+  //           "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'; media-src 'self' blob:;",
+  //         ],
+  //       },
+  //     });
+  //   });
 
   // and load the index.html of the app.
   mainWindow.loadFile("index.html");
@@ -32,11 +35,55 @@ const createWindow = () => {
   // mainWindow.webContents.openDevTools()
 };
 
+function registerIPC() {
+  ipcMain.handle("run-command", async (event, command, args) => {
+    return new Promise((resolve, reject) => {
+      runningProcess = spawn(command, args);
+      let output = "";
+
+      runningProcess.stdout.on("data", (data) => {
+        output += data.toString();
+        console.log("output comming", data.toString());
+      });
+
+      runningProcess.stderr.on("data", (data) => {
+        console.error(`stderr: ${data}`);
+      });
+
+      runningProcess.on("close", (code) => {
+        if (code === 0) {
+          resolve(output);
+        } else {
+          reject(new Error(`Process exited with code ${code}`));
+        }
+        runningProcess = null;
+      });
+    });
+  });
+
+  ipcMain.handle("stop-command", () => {
+    if (!runningProcess) {
+      return Promise.reject(new Error("No process is running"));
+    }
+    return new Promise((resolve, reject) => {
+      runningProcess.kill("SIGTERM"); // Send signal to terminate the process
+
+      runningProcess.on("close", (code) => {
+        console.log(`Process terminated with code ${code}`);
+        runningProcess = null; // Clear reference
+        resolve("Process stopped");
+      });
+      // Optionally, you could also handle process errors here
+    });
+  });
+}
+
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.whenReady().then(() => {
   createWindow();
+  registerIPC();
 
   app.on("activate", () => {
     // On macOS it's common to re-create a window in the app when the
