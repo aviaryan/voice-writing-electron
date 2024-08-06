@@ -1,5 +1,6 @@
 <script>
   let isStreaming = false;
+  let output = '';
 
   async function startStreaming() {
     try {
@@ -31,9 +32,14 @@
     }
     isStreaming = false;
   }
+
+  window.api.onStreamOutput((data) => {
+    output = data;
+  });
 </script>
 
 <div>
+	<pre>{output}</pre>
   <button on:click={isStreaming ? stopStreaming : startStreaming}>
     {isStreaming ? "Stop Streaming" : "Start Streaming"}
   </button>

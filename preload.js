@@ -18,4 +18,6 @@ contextBridge.exposeInMainWorld("api", {
   runCommand: (command, args) =>
     ipcRenderer.invoke("run-command", command, args),
   stopCommand: () => ipcRenderer.invoke("stop-command"),
+  onStreamOutput: (callback) =>
+    ipcRenderer.on("transcribe-stream-output", (event, data) => callback(data)),
 });

@@ -2,12 +2,8 @@
 const { app, BrowserWindow, ipcMain } = require("electron");
 const { exec, spawn } = require("child_process");
 const path = require("node:path");
-const Convert = require("ansi-to-html");
-const convert = new Convert();
 // thanks to https://stackoverflow.com/a/48270043/2295672 for terminal
 const Terminal = require("terminal.js");
-
-const terminal = new Terminal({ columns: 150, rows: 100 });
 
 let runningProcess = null;
 
@@ -21,19 +17,6 @@ const createWindow = () => {
     },
   });
 
-  // Modify CSP to allow 'blob:' for media sources
-  // not needed apparantely
-  //   session.defaultSession.webRequest.onHeadersReceived((details, callback) => {
-  //     callback({
-  //       responseHeaders: {
-  //         ...details.responseHeaders,
-  //         "Content-Security-Policy": [
-  //           "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'; media-src 'self' blob:;",
-  //         ],
-  //       },
-  //     });
-  //   });
-
   // and load the index.html of the app.
   mainWindow.loadFile("index.html");
 
@@ -44,25 +27,14 @@ const createWindow = () => {
 function registerIPC() {
   ipcMain.handle("run-command", async (event, command, args) => {
     return new Promise((resolve, reject) => {
-		// const cmd = command + " " + args.join(" ") + ` 2>/dev/null`;
-		// runningProcess = exec(cmd, (error, stdout, stderr) => {
-		// 	if (error) {
-		// 		console.error(`exec error: ${error}`);
-		// 		reject(stderr);
-		// 		return;
-		// 	}
-		// 	console.log(`stdout: ${stdout}`);
-		// 	resolve(stdout);
-		// 	// stderr will be empty due to redirection
-		// });
-
       runningProcess = spawn(command, args, { shell: true });
-      let output = "";
+	  const terminal = new Terminal({ columns: 150, rows: 100 });
 
       runningProcess.stdout.on("data", (data) => {
 		terminal.write(data);
-        output += convert.toHtml(data.toString());
-        console.log("output comming", data.toString());
+		event.sender.send("transcribe-stream-output", terminal.toString("plain").trim());
+        // output += data.toString();
+        // console.log("output comming", data.toString());
       });
 
       runningProcess.stderr.on("data", (data) => {
@@ -71,8 +43,8 @@ function registerIPC() {
 
       runningProcess.on("close", (code) => {
         if (code === 0) {
-		console.log("terminal final", terminal.toString("ansi"));
-          resolve(terminal.toString("ansi"));
+			console.log("terminal final", terminal.toString("plain"));
+          resolve(terminal.toString("plain").trim());
         } else {
           reject(new Error(`Process exited with code ${code}`));
         }
