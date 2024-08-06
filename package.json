@@ -13,6 +13,8 @@
   },
   "build": {
     "appId": "com.aviaryan.voicenotes",
+    "productName": "VoiceWriting",
+    "asar": true,
     "files": [
       "out/**/*",
       "main.js",
