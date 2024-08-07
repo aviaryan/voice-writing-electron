@@ -10,7 +10,7 @@ const groq = new Groq({
 });
 let runningProcess = null;
 
-function registerIPC() {
+function registerRunStreamCommand() {
   ipcMain.handle("run-command", async (event, command, args) => {
     return new Promise((resolve, reject) => {
       runningProcess = spawn(command, args, { shell: true });
@@ -39,7 +39,9 @@ function registerIPC() {
       });
     });
   });
+}
 
+function registerStopStreamCommand() {
   ipcMain.handle("stop-command", () => {
     if (!runningProcess) {
       return Promise.reject(new Error("No process is running"));
@@ -55,7 +57,9 @@ function registerIPC() {
       // Optionally, you could also handle process errors here
     });
   });
+}
 
+function registerCallGroqAPI() {
   ipcMain.handle("call-groq-api", async (event, prompt) => {
     const chatCompletion = groq.chat.completions.create({
       messages: [
@@ -68,6 +72,12 @@ function registerIPC() {
     });
     return chatCompletion;
   });
+}
+
+function registerIPC() {
+  registerRunStreamCommand();
+  registerStopStreamCommand();
+  registerCallGroqAPI();
 }
 
 module.exports = { registerIPC };
