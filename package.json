@@ -20,7 +20,8 @@
       "src/main/**/*",
       "node_modules/**/*",
       "package.json",
-      ".env"
+      ".env",
+      "loadEnv.js"
     ],
     "directories": {
       "buildResources": "build"
