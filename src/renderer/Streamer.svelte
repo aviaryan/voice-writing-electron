@@ -13,10 +13,10 @@
 
   async function startStreaming() {
     try {
-      const program = "/Users/aviaryan/dev/__others/whisper.cpp/stream";
+      const program = await window.api.getEnv('STREAM_EXECUTABLE_PATH');
       const args = [
         "-m",
-        "/Users/aviaryan/dev/__others/whisper.cpp/models/ggml-small.en.bin",
+        await window.api.getEnv('MODEL_PATH'),
         "-t",
         "8",
         "--step",
@@ -60,7 +60,7 @@
 <style>
   div {
     text-align: center;
-	max-width: 100%;
+    max-width: 100%;
   }
 
   button {

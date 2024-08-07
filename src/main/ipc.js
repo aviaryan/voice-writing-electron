@@ -74,10 +74,17 @@ function registerCallGroqAPI() {
   });
 }
 
+function registerGetEnv() {
+  ipcMain.handle("get-env", (event, varName) => {
+    return process.env[varName];
+  });
+}
+
 function registerIPC() {
   registerRunStreamCommand();
   registerStopStreamCommand();
   registerCallGroqAPI();
+  registerGetEnv();
 }
 
 module.exports = { registerIPC };
