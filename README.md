@@ -3,11 +3,6 @@
 Voice Writing is a Whisper based Desktop app to write using your voice.
 It works in real-time and even fixes common grammatical and other issues in your speech.
 
-## Preview
-
-https://github.com/user-attachments/assets/d75b4fc8-1d5e-4dec-9a9c-e74153303a02
-
-
 ## Requirements
 
 1. Whisper.cpp stream command (available in [this post](https://github.com/aviaryan/voice-writing-electron/discussions/4))
@@ -15,7 +10,7 @@ https://github.com/user-attachments/assets/d75b4fc8-1d5e-4dec-9a9c-e74153303a02
 3. Groq API key
 
 
-## Setup
+## 🛠️ Setup
 
 #### 1. Clone and install dependencies
 
@@ -26,9 +21,9 @@ yarn install
 
 #### 2. Populate `.env` file
 
-1. Link the absolute path to `stream`.
-2. Link the absolute path to `model`.
-3. Provide the Groq API key.
+1. Add the absolute path for `stream` executable in `STREAM_EXECUTABLE_PATH`.
+2. Add the absolute path for `model` in `MODEL_PATH`.
+3. Fill in the GROQ API Key.
 
 Example -
 
@@ -44,8 +39,14 @@ MODEL_PATH=/Users/john/dev/ggml-small.en.bin
 yarn start
 ```
 
+### 4. Start speaking!
 
-## Packaging into an app
+You should have it ready now and you can use it as shown in the video below.
+
+https://github.com/user-attachments/assets/d75b4fc8-1d5e-4dec-9a9c-e74153303a02
+
+
+## 📦 Packaging into an app
 
 1. Ensure `.env` has all the values as it gets packaged.
 2. Run `yarn build`. Builds the app only using `target: dir`. Use `target: dmg` to build dmg.
