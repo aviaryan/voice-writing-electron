@@ -10,17 +10,37 @@ https://github.com/user-attachments/assets/d75b4fc8-1d5e-4dec-9a9c-e74153303a02
 
 ## Requirements
 
-1. Whisper.cpp stream command
+1. Whisper.cpp stream command (available in [this post](https://github.com/aviaryan/voice-writing-electron/discussions/4))
 2. A GGML model for Whisper
 3. Groq API key
 
 
-## Using
+## Setup
+
+#### 1. Clone and install dependencies
 
 ```sh
 git clone https://github.com/aviaryan/voice-writing-electron.git
 yarn install
-# create .env from .env.copy and fill with your values
+```
+
+#### 2. Populate `.env` file
+
+1. Link the absolute path to `stream`.
+2. Link the absolute path to `model`.
+3. Provide the Groq API key.
+
+Example -
+
+```ini
+GROQ_API_KEY=gsk_abcdksk2kkskssd
+STREAM_EXECUTABLE_PATH=/Users/john/dev/stream
+MODEL_PATH=/Users/john/dev/ggml-small.en.bin
+```
+
+#### 3. Start the application
+
+```sh
 yarn start
 ```
 
