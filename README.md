@@ -3,7 +3,16 @@
 Voice Writing is a Whisper based Desktop app to write using your voice.
 It works in real-time and even fixes common grammatical and other issues in your speech.
 
+## Preview
+
 https://github.com/user-attachments/assets/d75b4fc8-1d5e-4dec-9a9c-e74153303a02
+
+
+## Requirements
+
+1. Whisper.cpp stream command
+2. A GGML model for Whisper
+3. Groq API key
 
 
 ## Using
@@ -14,6 +23,7 @@ yarn install
 # create .env from .env.copy and fill with your values
 yarn start
 ```
+
 
 ## Packaging into an app
 
