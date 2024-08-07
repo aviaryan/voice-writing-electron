@@ -15,11 +15,8 @@ yarn install
 yarn start
 ```
 
-## Packaging
+## Packaging into an app
 
 1. Ensure `.env` has all the values as it gets packaged.
 2. Run `yarn build`. Builds the app only using `target: dir`. Use `target: dmg` to build dmg.
-
-## Docs
-
-- https://www.electronjs.org/docs/latest/tutorial/quick-start
+3. Check `dist` folder for the app.
