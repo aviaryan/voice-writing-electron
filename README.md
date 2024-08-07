@@ -6,20 +6,20 @@ It works in real-time and even fixes common grammatical and other issues in your
 https://github.com/user-attachments/assets/d75b4fc8-1d5e-4dec-9a9c-e74153303a02
 
 
-### Using
+## Using
 
 ```sh
-git clone # this repo
-yarn
-# populate .env with your values
+git clone https://github.com/aviaryan/voice-writing-electron.git
+yarn install
+# create .env from .env.copy and fill with your values
 yarn start
 ```
 
-### Packaging
+## Packaging
 
-1. Ensure `.env` (copied from `.env.copy`) has all the values as it gets packaged.
+1. Ensure `.env` has all the values as it gets packaged.
 2. Run `yarn build`. Builds the app only using `target: dir`. Use `target: dmg` to build dmg.
 
-### Docs
+## Docs
 
 - https://www.electronjs.org/docs/latest/tutorial/quick-start

@@ -1,4 +1,3 @@
-
 const { ipcMain } = require("electron");
 const { spawn } = require("child_process");
 const Groq = require("groq-sdk");

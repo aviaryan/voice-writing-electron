@@ -6,17 +6,17 @@
   let output = "";
 
   function processStream(data) {
-	// no need to show [BLANK_AUDIO] to the end-user, the terminal stream can have it though
-	// don't try to mess with the terminal stream
-	return data.replace(/\[BLANK_AUDIO\]/g, '');
+    // no need to show [BLANK_AUDIO] to the end-user, the terminal stream can have it though
+    // don't try to mess with the terminal stream
+    return data.replace(/\[BLANK_AUDIO\]/g, "");
   }
 
   async function startStreaming() {
     try {
-      const program = await window.api.getEnv('STREAM_EXECUTABLE_PATH');
+      const program = await window.api.getEnv("STREAM_EXECUTABLE_PATH");
       const args = [
         "-m",
-        await window.api.getEnv('MODEL_PATH'),
+        await window.api.getEnv("MODEL_PATH"),
         "-t",
         "8",
         "--step",
@@ -27,13 +27,13 @@
       isStreaming = true;
       const result = await window.api.runCommand(program, args);
       console.log(result);
-	  isPostProcessing = true;
-	  const processed = await postProcessTranscription(processStream(result));
-	  output = processed;
+      isPostProcessing = true;
+      const processed = await postProcessTranscription(processStream(result));
+      output = processed;
     } catch (err) {
       console.error("Error accessing microphone", err);
     }
-	isPostProcessing = false;
+    isPostProcessing = false;
   }
 
   async function stopStreaming() {
@@ -51,7 +51,10 @@
 </script>
 
 <div>
-  <button disabled={isPostProcessing} on:click={isStreaming ? stopStreaming : startStreaming}>
+  <button
+    disabled={isPostProcessing}
+    on:click={isStreaming ? stopStreaming : startStreaming}
+  >
     {isStreaming ? "Stop Recording" : "Start Recording"}
   </button>
   <p>{output}</p>
@@ -70,8 +73,8 @@
   }
 
   p {
-	font-family: 'Courier New', Courier, monospace;
-	margin: 0 20px;
-	margin-top: 10px;
+    font-family: "Courier New", Courier, monospace;
+    margin: 0 20px;
+    margin-top: 10px;
   }
 </style>
