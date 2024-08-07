@@ -11,12 +11,13 @@ https://github.com/user-attachments/assets/d75b4fc8-1d5e-4dec-9a9c-e74153303a02
 ```sh
 git clone # this repo
 yarn
+# populate .env with your values
 yarn start
 ```
 
 ### Packaging
 
-1. Hard-code the Groq API key in there.
+1. Ensure `.env` (copied from `.env.copy`) has all the values as it gets packaged.
 2. Run `yarn build`. Builds the app only using `target: dir`. Use `target: dmg` to build dmg.
 
 ### Docs

@@ -1,6 +1,8 @@
 const { app, BrowserWindow, systemPreferences } = require("electron");
 const path = require("node:path");
 const { registerIPC } = require("./ipc");
+// load env vars
+require("dotenv").config();
 
 const createWindow = () => {
   // Create the browser window.
