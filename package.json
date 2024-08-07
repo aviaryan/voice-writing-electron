@@ -2,7 +2,7 @@
   "name": "voice-writing-electron",
   "version": "1.0.1",
   "description": "Voice Writing App using Electron",
-  "main": "main.js",
+  "main": "./src/main/main.js",
   "scripts": {
     "start": "electron .",
     "build": "electron-builder",
@@ -17,9 +17,7 @@
     "asar": true,
     "files": [
       "out/**/*",
-      "main.js",
-      "preload.js",
-      "index.html",
+      "src/main/**/*",
       "node_modules/**/*",
       "package.json"
     ],
