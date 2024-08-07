@@ -1,4 +1,4 @@
-## VoiceWriting
+# VoiceWriting
 
 Voice Writing is a Whisper based Desktop app to write using your voice.
 It works in real-time and even fixes common grammatical and other issues in your speech.
