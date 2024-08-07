@@ -1,6 +1,6 @@
 {
   "name": "voice-writing-electron",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Voice Writing App using Electron",
   "main": "main.js",
   "scripts": {
@@ -12,7 +12,7 @@
     "dev:webpack": "webpack serve --mode development"
   },
   "build": {
-    "appId": "com.aviaryan.voicenotes",
+    "appId": "com.aviaryan.voicewriting",
     "productName": "VoiceWriting",
     "asar": true,
     "files": [
@@ -31,7 +31,7 @@
     },
     "mac": {
       "icon": "images/icon",
-      "category": "your.app.category.type",
+      "category": "public.app-category.utilities",
       "target": "dir"
     },
     "linux": {
