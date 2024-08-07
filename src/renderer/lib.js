@@ -10,6 +10,6 @@ export async function postProcessTranscription(text) {
   console.log(chatCompletion);
   let fixed = chatCompletion.choices[0]?.message?.content || "";
   // clean up stuff
-  fixed = fixed.replace(/^Here is the (fixed|corrected).*:/i, '');
+  fixed = fixed.replace(/^Here is the [^:]*text.*:/i, '');
   return fixed.trim();
 }
