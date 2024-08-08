@@ -39,10 +39,12 @@ yarn start
 
 You should have it ready now and you can use it as shown in the video below.
 
-https://github.com/user-attachments/assets/d75b4fc8-1d5e-4dec-9a9c-e74153303a02
+https://github.com/user-attachments/assets/8eaa697b-ffeb-4aea-8566-10a711a59b74
 
 
 ## 📦 Packaging into an app
+
+![packaged app preview](https://github.com/user-attachments/assets/90ae73c6-e5ba-46e6-8224-8b3e92e26b27)
 
 1. Ensure `.env` has all the values as `.env` file gets packaged with the application.
 2. Run `yarn build`. It builds the app only using `target: dir` on Mac. Use `target: dmg` to build dmg.
