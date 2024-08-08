@@ -1,7 +1,9 @@
 # 🗣️📝 VoiceWriting
 
-Voice Writing is a Whisper based Desktop app to write using your voice.
-It works in real-time and even fixes common grammatical and other issues in your speech.
+VoiceWriting is a Whisper based Desktop application to write using your voice.
+It works in real-time and even fixes common grammatical, punctuation and other issues in your speech.
+
+Give it a try by following the instructions below.
 
 ![preview](https://github.com/user-attachments/assets/72c9fc6b-f313-4cd2-a996-7eecdc63738f)
 
@@ -42,7 +44,7 @@ You should have the application ready now and you can start using it as shown in
 https://github.com/user-attachments/assets/8eaa697b-ffeb-4aea-8566-10a711a59b74
 
 
-## 📦 Packaging into an app
+## 📦 Distributing as an app
 
 ![packaged app preview](https://github.com/user-attachments/assets/90ae73c6-e5ba-46e6-8224-8b3e92e26b27)
 
