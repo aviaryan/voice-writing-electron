@@ -1,7 +1,6 @@
 const { ipcMain } = require("electron");
 const { spawn } = require("child_process");
 const Groq = require("groq-sdk");
-// thanks to https://stackoverflow.com/a/48270043/2295672 for terminal
 const Terminal = require("terminal.js");
 
 const groq = new Groq({

@@ -3,11 +3,7 @@
 </script>
 
 <main>
-  <h1>Voice Input App</h1>
-  <!-- <button on:click={() => (count += 1)}>
-    Counter: {count}
-  </button>
-  <button on:click={transcribe}> Transcribe </button> -->
+  <h1>Voice Writing</h1>
   <Streamer />
 </main>
 
