@@ -7,7 +7,7 @@ Give it a try by following the instructions below.
 
 ![preview](https://github.com/user-attachments/assets/72c9fc6b-f313-4cd2-a996-7eecdc63738f)
 
-## 🛠️ Setup
+## 🛠️ Easy Setup
 
 #### 1. Clone and install dependencies
 
