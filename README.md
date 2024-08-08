@@ -1,14 +1,7 @@
-# VoiceWriting
+# 🗣️📝 VoiceWriting
 
 Voice Writing is a Whisper based Desktop app to write using your voice.
 It works in real-time and even fixes common grammatical and other issues in your speech.
-
-## Requirements
-
-1. Whisper.cpp stream command (available in [this post](https://github.com/aviaryan/voice-writing-electron/discussions/4))
-2. A GGML model for Whisper
-3. Groq API key
-
 
 ## 🛠️ Setup
 
@@ -17,13 +10,14 @@ It works in real-time and even fixes common grammatical and other issues in your
 ```sh
 git clone https://github.com/aviaryan/voice-writing-electron.git
 yarn install
+cp .env.copy .env
 ```
 
 #### 2. Populate `.env` file
 
-1. Add the absolute path for `stream` executable in `STREAM_EXECUTABLE_PATH`.
-2. Add the absolute path for `model` in `MODEL_PATH`.
-3. Fill in the GROQ API Key.
+1. Add the absolute path for whisper.cpp's `stream` executable in `STREAM_EXECUTABLE_PATH`. Learn more about [stream](docs/DEPENDENCIES.md#stream).
+2. Add the absolute path for GGML Whisper `model` in `MODEL_PATH`. Learn more about [model](docs/DEPENDENCIES.md#model).
+3. Fill in the GROQ API Key. Learn more about [Groq API key](docs/DEPENDENCIES.md#groq).
 
 Example -
 
@@ -39,7 +33,7 @@ MODEL_PATH=/Users/john/dev/ggml-small.en.bin
 yarn start
 ```
 
-### 4. Start speaking!
+#### 4. Start speaking!
 
 You should have it ready now and you can use it as shown in the video below.
 
