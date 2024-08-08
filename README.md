@@ -37,7 +37,7 @@ yarn start
 
 #### 4. Start speaking!
 
-You should have it ready now and you can use it as shown in the video below.
+You should have the application ready now and you can start using it as shown in the video below. Make sure to unmute 🔉 the video before playing.
 
 https://github.com/user-attachments/assets/8eaa697b-ffeb-4aea-8566-10a711a59b74
 
