@@ -1,5 +1,6 @@
 <script>
   import { postProcessTranscription } from "./lib";
+  import CopyClipboard from './CopyClipboard.svelte';
 
   let isStreaming = false;
   let isPostProcessing = false;
@@ -57,6 +58,7 @@
   >
     {isStreaming ? "Stop Recording" : "Start Recording"}
   </button>
+  <CopyClipboard textToCopy={output} />
   <p>{output}</p>
 </div>
 

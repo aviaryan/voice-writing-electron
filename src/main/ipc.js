@@ -1,4 +1,4 @@
-const { ipcMain } = require("electron");
+const { ipcMain, clipboard } = require("electron");
 const { spawn } = require("child_process");
 const Groq = require("groq-sdk");
 const Terminal = require("terminal.js");
@@ -78,11 +78,18 @@ function registerGetEnv() {
   });
 }
 
+function registerCopyToClipboard() {
+  ipcMain.handle("copy-to-clipboard", (event, text) => {
+    return clipboard.writeText(text);
+  });
+}
+
 function registerIPC() {
   registerRunStreamCommand();
   registerStopStreamCommand();
   registerCallGroqAPI();
   registerGetEnv();
+  registerCopyToClipboard();
 }
 
 module.exports = { registerIPC };
