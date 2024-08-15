@@ -1,4 +1,5 @@
 <script>
+  import './global.css';
   import { postProcessTranscription } from "./lib";
   import CopyClipboard from './CopyClipboard.svelte';
 
@@ -70,12 +71,6 @@
 
   button {
     margin: 10px;
-    padding: 10px;
-    font-size: 16px;
-  }
-
-  button:hover {
-    cursor: pointer;
   }
 
   p {
