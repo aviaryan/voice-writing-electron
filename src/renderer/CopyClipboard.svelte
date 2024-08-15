@@ -1,4 +1,5 @@
 <script>
+  import './global.css';
   export let textToCopy = '';
 
   function copyToClipboard() {
@@ -6,17 +7,6 @@
     alert("Text copied to clipboard!");
   }
 </script>
-
-<style>
-  button {
-    padding: 10px;
-    font-size: 16px;
-  }
-
-  button:hover {
-    cursor: pointer;
-  }
-</style>
 
 {#if textToCopy}
   <button on:click={copyToClipboard}>Copy Text</button>
